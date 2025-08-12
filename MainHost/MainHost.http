@@ -1,0 +1,6 @@
+@MainHost_HostAddress = http://localhost:5224
+
+GET {{MainHost_HostAddress}}//
+Accept: application/json
+
+###
