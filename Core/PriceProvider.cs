@@ -1,12 +1,7 @@
 ﻿using Core.Interfaces;
 using Core.Models;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core
 {
@@ -28,7 +23,7 @@ namespace Core
             if (!_buffer.TryGetValue(symbol, out var slot))
             {
                 _logger.LogWarning("No price slot found for symbol: {Symbol}", symbol);
-                return default;
+                return null;
             }
             lock (slot.Lock())
             {
@@ -39,7 +34,10 @@ namespace Core
         public IEnumerable<PriceTick> GetHistoryPricebySymbol(string symbol)
         {
             if (!_buffer.TryGetValue(symbol, out var slot))
+            {
+                _logger.LogWarning("No price history found for symbol: {Symbol}", symbol);
                 return Array.Empty<PriceTick>();
+            }
 
             lock (slot.Lock())
             {

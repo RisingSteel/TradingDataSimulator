@@ -1,13 +1,7 @@
 ﻿using Core.Interfaces;
 using Core.Models;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core
 {
@@ -28,7 +22,7 @@ namespace Core
         {
 
             var slot = _buffer.GetOrAdd(priceTick.Symbol, _ => new PriceSlot(_capacity));
-            
+
             lock (slot.Lock())
             {
                 if (slot._slotBuffer.Count >= _capacity)

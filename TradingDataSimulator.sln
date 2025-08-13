@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainHost", "MainHost\MainHost.csproj", "{A24A63BB-1604-4DB8-9ACA-E3736842AD62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRConsoleSlient", "SignalRConsoleSlient\SignalRConsoleSlient.csproj", "{93BC91A0-F48F-4162-96CD-214DBCE43E8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpConsoleClient", "TcpConsoleClient\TcpConsoleClient.csproj", "{1E105353-403E-4FC5-9676-C5E8AB84F7B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{A24A63BB-1604-4DB8-9ACA-E3736842AD62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A24A63BB-1604-4DB8-9ACA-E3736842AD62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A24A63BB-1604-4DB8-9ACA-E3736842AD62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93BC91A0-F48F-4162-96CD-214DBCE43E8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93BC91A0-F48F-4162-96CD-214DBCE43E8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93BC91A0-F48F-4162-96CD-214DBCE43E8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93BC91A0-F48F-4162-96CD-214DBCE43E8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E105353-403E-4FC5-9676-C5E8AB84F7B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E105353-403E-4FC5-9676-C5E8AB84F7B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E105353-403E-4FC5-9676-C5E8AB84F7B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E105353-403E-4FC5-9676-C5E8AB84F7B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
