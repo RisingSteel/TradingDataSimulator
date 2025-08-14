@@ -31,7 +31,7 @@ namespace Core
                 }
                 slot._slotBuffer.Enqueue(priceTick);
                 slot._lastTick = priceTick;
-                _logger.LogDebug("Added price tick for {Symbol}: {Price} at {Timestamp}", priceTick.Symbol, priceTick.Price, priceTick.TimestampUtc);
+                _logger.LogDebug("Added price tick for {Symbol}: {Price} at {Timestamp}", priceTick.Symbol, priceTick.Price, priceTick.Timestamp);
             }
         }
 
