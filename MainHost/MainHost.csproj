@@ -24,7 +24,7 @@
 	<ItemGroup>
 		<None Include="Plugins\**\*.*">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Link>plugins\%(RecursiveDir)%(FileName)%(Extension)</Link>
+			<TargetPath>plugins\%(RecursiveDir)%(FileName)%(Extension)</TargetPath>
 		</None>
 	</ItemGroup>
 
