@@ -19,4 +19,11 @@
     <Folder Include="Plugins\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<None Include="Plugins\**\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Link>plugins\%(RecursiveDir)%(FileName)%(Extension)</Link>
+		</None>
+	</ItemGroup>
+
 </Project>
