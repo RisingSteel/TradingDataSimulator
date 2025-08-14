@@ -21,13 +21,13 @@ namespace Core
             _priceBuffer = priceBuffer ?? throw new ArgumentNullException(nameof(priceBuffer));
             _priceChangeNotifier = priceChangeNotifier;
             _initialPrices = initialPrices ?? throw new ArgumentNullException(nameof(initialPrices));
+            _currentPrices = new Dictionary<string, decimal>(_initialPrices);
             _logger.LogInformation("PriceGenerator service initialized.");
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var currentTime = DateTime.UtcNow;
-            _currentPrices = new Dictionary<string, decimal>(_initialPrices);
             foreach (var kvp in _currentPrices)
             {
                 var symbol = kvp.Key;
@@ -37,6 +37,7 @@ namespace Core
                 _priceBuffer.Add(priceTick);
                 _logger.LogInformation("Initial price for {Symbol} : {Price}", priceTick.Symbol, priceTick.Price);
             }
+            await Task.Delay(_updateTime, stoppingToken);
 
 
 
