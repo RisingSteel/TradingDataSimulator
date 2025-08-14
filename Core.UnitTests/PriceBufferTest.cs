@@ -1,5 +1,4 @@
 using Core.Models;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Core.UnitTests

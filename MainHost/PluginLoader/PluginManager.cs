@@ -22,12 +22,7 @@ namespace MainHost.PluginLoader
 
         public void LoadPlugins()
         {
-            string pluginPath = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
-
-            if (!Directory.Exists(pluginPath))
-            {
-                Directory.CreateDirectory(pluginPath);
-            }
+            string pluginPath = Path.Combine(AppContext.BaseDirectory, "Plugins");
             var pluginFiles = Directory.GetFiles(pluginPath, "*.dll");
             foreach (var pluginFile in pluginFiles)
             {
@@ -78,5 +73,7 @@ namespace MainHost.PluginLoader
             GC.WaitForPendingFinalizers(); 
             GC.Collect();
         }
+
+        public IEnumerable<(PluginLoadContext, List<IDataFormatter>)> Contexts => _contexts;
     }
 }
