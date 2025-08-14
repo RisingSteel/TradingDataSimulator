@@ -59,7 +59,7 @@ All endpoints are documented in the Swagger UI.
 
 To run the Tcp or SignalR clients, right-click on the `TcpClient` or `SignalRClient` project and select Debug -> Start without Debugging/Start new instance.
 
-Or use the command line to navigate to the project directory while MainHost is running and run commands:
+Or use the command line to navigate to the solution directory while MainHost is running and run commands:
 
 	dotnet run --project TcpConsoleClient
 	dotnet run --project SignalRConsoleClient
