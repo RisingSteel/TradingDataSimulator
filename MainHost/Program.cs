@@ -2,6 +2,7 @@
 using Core;
 using Core.Interfaces;
 using MainHost.CommunicationProtocols;
+using MainHost.PluginLoader;
 using static MainHost.CommunicationProtocols.SignalRPriceBroadcaster;
 
 namespace MainHost
@@ -18,6 +19,7 @@ namespace MainHost
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<IPriceChangeNotifier, SignalRPriceBroadcaster>();
             builder.Services.AddSingleton<IPriceChangeNotifier, TcpPriceServer>();
+            builder.Services.AddSingleton<IPriceChangeNotifier, PluginManager>();
 
             builder.Services.AddSingleton<IPriceProvider, PriceProvider>();
             builder.Services.AddSingleton<IPriceBuffer>(sp => new PriceBuffer(sp.GetRequiredService<ILogger<PriceBuffer>>(), capacity: 10));
