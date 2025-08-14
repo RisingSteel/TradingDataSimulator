@@ -3,6 +3,7 @@ using Core;
 using Core.Interfaces;
 using MainHost.CommunicationProtocols;
 using MainHost.PluginLoader;
+using Serilog;
 using static MainHost.CommunicationProtocols.SignalRPriceBroadcaster;
 
 namespace MainHost
@@ -12,6 +13,12 @@ namespace MainHost
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(builder.Configuration)
+                .CreateLogger();
+
+            builder.Host.UseSerilog();
 
             // Add services to the container.
             builder.Services.AddControllers();

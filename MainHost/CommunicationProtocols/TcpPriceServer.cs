@@ -48,7 +48,7 @@ namespace MainHost.CommunicationProtocols
 
         public async Task PriceNotifierAsync(PriceTick tick)
         {
-            var line = $"{tick.Timestamp} : Price for {tick.Symbol} is {tick.Price}";
+            var line = $"Tcp console - {tick.Timestamp} : Price for {tick.Symbol} is {tick.Price}";
 
             foreach (var kvp in _conns)
             {

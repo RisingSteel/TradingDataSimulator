@@ -21,7 +21,7 @@ namespace Plugins.LoaderTests
                 {
                     Assert.NotNull(plugin);
                     Assert.IsAssignableFrom<IDataFormatter>(plugin);
-                    Assert.True(plugin.FormatPrice("AAPL", 150.00m, DateTime.UtcNow).Length > 0);
+                    Assert.True(plugin.FormatPrice("AAPL", 150.00m, DateTime.Now).Length > 0);
 
                 }
             }
