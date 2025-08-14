@@ -12,8 +12,8 @@ namespace Core.UnitTests
 
             var priceBuffer = new PriceBuffer(logger, capacity: 5);
 
-            priceBuffer.Add(new PriceTick("AAPL", 150.00m, DateTime.UtcNow));
-            priceBuffer.Add(new PriceTick("TSLA", 990.00m, DateTime.UtcNow));
+            priceBuffer.Add(new PriceTick("AAPL", 150.00m, DateTime.Now));
+            priceBuffer.Add(new PriceTick("TSLA", 990.00m, DateTime.Now));
 
             var buffer = priceBuffer.GetBuffer();
 
@@ -31,7 +31,7 @@ namespace Core.UnitTests
 
             for (int i = 0; i < 12; i++)
             {
-                priceBuffer.Add(new PriceTick("AAPL", 150.00m + i, DateTime.UtcNow));
+                priceBuffer.Add(new PriceTick("AAPL", 150.00m + i, DateTime.Now));
             }
 
             var buffer = priceBuffer.GetBuffer();

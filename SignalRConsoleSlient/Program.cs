@@ -8,7 +8,7 @@ var connection = new HubConnectionBuilder()
 
 connection.On<PriceTick>("PriceUpdated", priceTick =>
 {
-    Console.WriteLine($"{priceTick.Timestamp} : Price for {priceTick.Symbol} is {priceTick.Price}");
+    Console.WriteLine($"SignalR console - {priceTick.Timestamp} : Price for {priceTick.Symbol} is {priceTick.Price}");
 });
 
 await connection.StartAsync();

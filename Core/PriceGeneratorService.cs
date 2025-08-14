@@ -27,23 +27,24 @@ namespace Core
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var currentTime = DateTime.UtcNow;
             foreach (var kvp in _currentPrices)
             {
                 var symbol = kvp.Key;
                 var price = kvp.Value;
 
-                var priceTick = new PriceTick(symbol, price, DateTime.UtcNow);
+                var priceTick = new PriceTick(symbol, price, DateTime.Now);
                 _priceBuffer.Add(priceTick);
                 _logger.LogInformation("Initial price for {Symbol} : {Price}", priceTick.Symbol, priceTick.Price);
             }
+            var bar = new string('─', 90);
+            _logger.LogInformation($"{bar}");
             await Task.Delay(_updateTime, stoppingToken);
 
 
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                var time = DateTime.UtcNow;
+                var time = DateTime.Now;
 
                 foreach (var kvp in _currentPrices)
                 {
@@ -56,13 +57,13 @@ namespace Core
                     _currentPrices[symbol] = newPrice;
                     var priceTick = new PriceTick(symbol, newPrice, time);
                     _priceBuffer.Add(priceTick);
+                    _logger.LogInformation("{Timestamp} : Price for {Symbol} is {Price}", priceTick.Timestamp, priceTick.Symbol, priceTick.Price);
                     foreach (var notifier in _priceChangeNotifier)
                     {
                         _ = notifier.PriceNotifierAsync(priceTick);
                     }
-                    _logger.LogInformation("Generated price tick: {PriceTick}", priceTick);
                 }
-
+                _logger.LogInformation($"{bar}");
                 await Task.Delay(_updateTime, stoppingToken);
             }
         }
