@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/MainHost/Plugins/CsvFormatter.dll
+/MainHost/Plugins/JsonFormatter.dll
