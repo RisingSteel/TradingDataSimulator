@@ -57,7 +57,7 @@ namespace MainHost.PluginLoader
             {
                 foreach (var plugin in item.Item2)
                 {
-                    var pluginString = plugin.FormatPrice(priceTick.Symbol, priceTick.Price, priceTick.TimestampUtc);
+                    var pluginString = plugin.FormatPrice(priceTick.Symbol, priceTick.Price, priceTick.Timestamp);
                     _logger.LogInformation("{Plugin}: {Formatted}", plugin.GetType().Name, pluginString);
                 }
             }

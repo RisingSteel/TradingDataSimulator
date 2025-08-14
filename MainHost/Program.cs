@@ -52,20 +52,6 @@ namespace MainHost
 
             app.MapHub<PriceHub>("/hubs/prices");
 
-            app.MapGet("/api/prices", (IPriceProvider provider) => Results.Ok(provider.GetAllLatestPrices()));
-
-            app.MapGet("/api/prices/{symbol}", (string symbol, IPriceProvider provider) =>
-            {
-                var last = provider.GetLastPricebySymbol(symbol.ToUpper());
-                return last is null ? Results.NotFound() : Results.Ok(last);
-            });
-
-            app.MapGet("/api/prices/{symbol}/history", (string symbol, IPriceProvider provider) =>
-            {
-                var history = provider.GetHistoryPricebySymbol(symbol.ToUpper());
-                return history.Count() == 0 ? Results.NotFound() : Results.Ok(history);
-            });
-
             app.Run();
         }
     }
