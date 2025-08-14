@@ -67,5 +67,10 @@ namespace Core
             }
         }
 
+        public Dictionary<string, decimal> GetCurrentPrices()
+        {
+            return new Dictionary<string, decimal>(_currentPrices);
+        }
+
     }
 }
