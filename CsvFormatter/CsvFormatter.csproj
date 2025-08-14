@@ -9,11 +9,18 @@
   <ItemGroup>
     <ProjectReference Include="..\DataFormaterContract\DataFormaterContract.csproj" />
   </ItemGroup>
+
+	<PropertyGroup>
+		<SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildProjectDirectory)\..</SolutionDir>
+		<HostPluginsDir>$(SolutionDir)\MainHost\Plugins\</HostPluginsDir>
+	</PropertyGroup>
+
+	<Target Name="CopyPluginToHost" AfterTargets="Build">
+		<MakeDir Directories="$(HostPluginsDir)" />
+		<Copy
+		   SourceFiles="$(TargetPath)"
+		   DestinationFolder="$(HostPluginsDir)"
+		   SkipUnchangedFiles="true" />
+	</Target>
 	
-    <Target Name="CopyPluginToHost" AfterTargets="Build">
-    	<Copy SourceFiles="$(TargetDir)CsvFormatter.dll"
-    			DestinationFolder="$(SolutionDir)MainHost\Plugins\" />
-    </Target>
-
-
 </Project>
