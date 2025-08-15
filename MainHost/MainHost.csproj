@@ -24,8 +24,11 @@
 	<ItemGroup>
 		<None Include="Plugins\**\*.*">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Link>plugins\%(RecursiveDir)%(FileName)%(Extension)</Link>
+			<TargetPath>Plugins\%(RecursiveDir)%(FileName)%(Extension)</TargetPath>
 		</None>
 	</ItemGroup>
+	<Target Name="CleanBinPlugins" BeforeTargets="ResolveReferences">
+		<RemoveDir Directories="$(OutDir)plugins" />
+	</Target>
 
 </Project>

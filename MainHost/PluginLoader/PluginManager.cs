@@ -23,6 +23,10 @@ namespace MainHost.PluginLoader
         public void LoadPlugins()
         {
             string pluginPath = Path.Combine(AppContext.BaseDirectory, "Plugins");
+            if (!Directory.Exists(pluginPath))
+            {
+                Directory.CreateDirectory(pluginPath);
+            }
             var pluginFiles = Directory.GetFiles(pluginPath, "*.dll");
             foreach (var pluginFile in pluginFiles)
             {
