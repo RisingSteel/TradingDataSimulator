@@ -3,6 +3,7 @@ using Core;
 using Core.Interfaces;
 using MainHost.CommunicationProtocols;
 using MainHost.PluginLoader;
+using Microsoft.Extensions.Options;
 using Serilog;
 using static MainHost.CommunicationProtocols.SignalRPriceBroadcaster;
 
@@ -20,6 +21,10 @@ namespace MainHost
 
             builder.Host.UseSerilog();
 
+            builder.Services.AddOptions<PriceGeneratorOptions>()
+                .Bind(builder.Configuration.GetSection("PriceGeneratorOptions"))
+                .ValidateDataAnnotations();
+
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -29,17 +34,24 @@ namespace MainHost
             builder.Services.AddSingleton<IPriceChangeNotifier, PluginManager>();
 
             builder.Services.AddSingleton<IPriceProvider, PriceProvider>();
-            builder.Services.AddSingleton<IPriceBuffer>(sp => new PriceBuffer(sp.GetRequiredService<ILogger<PriceBuffer>>(), capacity: 10));
+
+            builder.Services.AddSingleton<IPriceBuffer>(sp =>
+            {
+                var options = sp.GetRequiredService<IOptions<PriceGeneratorOptions>>().Value;
+                return new PriceBuffer(sp.GetRequiredService<ILogger<PriceBuffer>>(), options.PriceBufferCapacity);
+            });
+
             builder.Services.AddHostedService(sp =>
             {
                 var buffer = sp.GetRequiredService<IPriceBuffer>();
                 var logger = sp.GetRequiredService<ILogger<PriceGeneratorService>>();
                 var notifier = sp.GetRequiredService<IEnumerable<IPriceChangeNotifier>>();
+                var options = sp.GetRequiredService<IOptions<PriceGeneratorOptions>>().Value;
 
                 var svc = new PriceGeneratorService(
                     logger: logger,
-                    initialPrices: new Dictionary<string, decimal> { ["AAPL"] = 190m, ["MSFT"] = 420m, ["GOOGL"] = 99m, ["TSLA"] = 231m, ["AMZN"] = 842m },
-                    updateTime: 5000,
+                    initialPrices: options.InitialPrices,
+                    updateTime: options.UpdateTime,
                     priceBuffer: buffer,
                     priceChangeNotifier: notifier
                 );

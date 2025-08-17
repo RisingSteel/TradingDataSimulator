@@ -13,4 +13,7 @@ connection.On<PriceTick>("PriceUpdated", priceTick =>
 
 await connection.StartAsync();
 
+Console.WriteLine("SignalR client started. Listening for messages...");
+Console.WriteLine("");
+
 await Task.Delay(-1);

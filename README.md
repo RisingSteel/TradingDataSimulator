@@ -39,6 +39,13 @@ Open your web browser and navigate to the following URL to access the API docume
 	
 	https://localhost:7137/swagger/index.html
 
+If you have problems with the certificate, you can trust it by running the following command in the command line:
+
+	dotnet dev-certs https --trust
+
+This will allow you to access the API endpoints securely.
+Rebuild the solution after trusting the certificate.
+
 The following endpoints are available:
 
 	GET /api/prices - Get all prices
@@ -56,6 +63,8 @@ Or you can use the command line with `curl` to test the endpoints:
 All endpoints are documented in the Swagger UI.
 
 ## Run the Tcp and SignalR clients
+
+MainHost must be running before starting the clients!
 
 To run the Tcp or SignalR clients, right-click on the `TcpClient` or `SignalRClient` project and select Debug -> Start without Debugging/Start new instance.
 
@@ -75,8 +84,7 @@ Or in the command line, navigate to the solution directory where `TradingDataSim
 	dotnet build JsonFormatter
 	dotnet build CsvFormatter
 
-After building, the plugins will be available in the `bin/Debug/net8.0` directory of each project.
-
+After building with command line, the plugins will be available in the `bin/Debug/net8.0` directory of each project and won't be coppied to `Plugins` directory.
 Move the built plugin files to the `Plugins` directory in the `MainHost` project.
 
 ## Run the tests
